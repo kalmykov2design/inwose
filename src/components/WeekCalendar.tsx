@@ -18,15 +18,23 @@ export function WeekCalendar(props: WeekCalendarProps) {
 
   console.log(today);
 
-  let count = 0;
-  for (let i = today - weekDay + 7; i > today - weekDay; i--) {
+  const firstDay = today - weekDay + 1;
+  const lastDay = today + (7 - weekDay);
+
+  for (let i = firstDay; i <= lastDay; i++) {
+    // Добавляем дни предыдущего месяца
     if (i < 1) {
-      days.push(daysInMonth(month, year) - count)
-      count++
-    } else days.push(i)
+      days.push(daysInMonth(month - 1, year) + i);
+    }
+    // Добавляем дни следующего месяца
+    else if (i > daysInMonth(month, year)) {
+      days.push(i - daysInMonth(month, year));
+    }
+    // Добавляем дни текущего месяца
+    else {
+      days.push(i);
+    }
   }
-  console.log(days);
-  days.reverse()
 
   return (
     <div className="container mx-[auto]">
