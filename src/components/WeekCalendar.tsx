@@ -37,10 +37,14 @@ export function WeekCalendar(props: WeekCalendarProps) {
   }
 
   return (
-    <div className="container mx-[auto]">
+    <div className="container mx-[auto] pt-4">
       <div className="flex items-center justify-between">
         {days.map(day => (
-          <span key={`day-${day}`}>{day}</span>
+          <span 
+            className={`${day === today ? "rounded-full bg-red-500 text-white" : ""} week-calendar__item`} 
+            key={`day-${day}`}>
+              {day}
+            </span>
         ))}
       </div>
     </div>
