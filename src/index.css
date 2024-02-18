@@ -16,7 +16,7 @@
 
 @layer utilities {
   .container-grid {
-    @apply container mx-[auto] h-20 w-full grid grid-cols-[1fr,_2fr,_1fr] px-5;
+    @apply container mx-[auto] min-h-[80px] w-full grid grid-cols-[1fr,_2fr,_1fr] p-8;
   }
   .container-grid>:nth-child(2) {
     @apply px-5;

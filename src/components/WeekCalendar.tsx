@@ -13,7 +13,7 @@ export function WeekCalendar(props: WeekCalendarProps) {
   const today = date.getDate()
   const weekDay = date.getDay()
   const year = date.getFullYear()
-  const month = date.getMonth() + 1
+  const month = date.getMonth()
   const days: number[] = []
 
   console.log(today);
