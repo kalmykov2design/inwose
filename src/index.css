@@ -10,7 +10,7 @@
 
 @layer components {
   .header__item {
-    @apply px-10 py-3 rounded-full text-white bg-gray-300;
+    @apply px-10 py-2 rounded-full text-white bg-gray-300;
   }
   .header__item--active {
     @apply bg-black;

@@ -38,7 +38,7 @@ export function Header(props: HeaderProps) {
           ))}
         </nav>
         <div className="gap-2">
-          <Button type='blue'>+ создать задачу</Button>
+          <Button type='arbitrary' style={{backgroundColor: "#0066ff", color: "white"}}>+ создать задачу</Button>
           <Coins coins={coins} />
         </div>
       </div>

@@ -18,11 +18,10 @@ export function MyTasksPage(props: MyTasksPageProps) {
       </div>
       {props.data && props.data.map(task => (
         <Task
-          buttonText={task.buttonText}
           coins={task.coins}
           size={task.size}
           title={task.title}
-          button={task.button}
+          type={task.type}
           text={task.text}
           timeLeft={task.timeLeft}
           key={"task" + task.timeLeft}
