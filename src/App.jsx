@@ -56,4 +56,17 @@ const mock = [
     text: "https://designweekend.ru",
     timeLeft: 38
   },
+  {
+    coins: {
+      coinsAmount: 20,
+      hasBg: false,
+      hasPlus: true,
+      coinColor: "green"
+    },
+    size: "large",
+    title: "Сверстать страницу \"Мои задачи\"",
+    type: "personal",
+    text: "<-- Время потраченное отмечено",
+    timeLeft: 16920
+  },
 ]
