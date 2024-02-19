@@ -7,10 +7,9 @@ interface SizeProps {
 }
 
 export function Size(props: SizeProps) {
-  const size = picSwitch(props.size);
   return (
-    <div className="flex gap-2">
-      <div className={`bg-[url(${size})] bg-center bg-no-repeat`}></div>
+    <div className="flex gap-2 font-medium">
+      {picSwitch(props.size)}
     </div>
   )
 };
@@ -18,11 +17,23 @@ export function Size(props: SizeProps) {
 function picSwitch(size: SizeType) {
   switch (size) {
     case "small":
-      return "/small_task.png"
+      return (<>
+        <div className={`bg-[url(/small_task.png)] bg-center bg-no-repeat w-6 h-6`}></div>
+        <span>Small</span>
+      </>
+      )
     case "medium":
-      return "/medium_task.png"
+      return (<>
+        <div className={`bg-[url(/medium_task.png)] bg-center bg-no-repeat w-6 h-6`}></div>
+        <span>Small</span>
+      </>
+      )
     case "large":
-      return "/large_task.png"
+      return (<>
+        <div className={`bg-[url(/large_task.png)] bg-center bg-no-repeat w-6 h-6`}></div>
+        <span>Small</span>
+      </>
+      )
     default:
       break;
   }

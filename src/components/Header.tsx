@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Coins } from './Coins';
+import { Button } from './Button';
 
 interface HeaderProps {
 
@@ -31,9 +32,9 @@ export function Header(props: HeaderProps) {
             <NavLink className={(navData) => ((navData.isActive ? 'header__item header__item--active' : 'header__item'))} to={item.path} key={`header-${item.path}`}>{item.text}</NavLink>
           ))}
         </nav>
-        <div className="flex items-center justify-start">
-          <button>+ создать задачу</button>
-          <Coins coinsNotEarnedAmount={200} coinsAmount={1128} hasBg hasPlus />
+        <div className="gap-2">
+          <Button type='blue'>+ создать задачу</Button>
+          <Coins coinsAmount={1128} hasBg />
         </div>
       </div>
     </header>
