@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Coins } from './Coins';
+import { Coins, CoinsProps } from './Coins';
 import { Button } from './Button';
 
 interface HeaderProps {
@@ -12,6 +12,11 @@ const headerItems = [
   { path: '/pari', text: 'Пари' },
   { path: '/team', text: 'Команда' },
 ]
+
+const coins: CoinsProps = {
+  coinsAmount: 1128,
+  hasBg: true,
+}
 
 export function Header(props: HeaderProps) {
   return (
@@ -34,7 +39,7 @@ export function Header(props: HeaderProps) {
         </nav>
         <div className="gap-2">
           <Button type='blue'>+ создать задачу</Button>
-          <Coins coinsAmount={1128} hasBg />
+          <Coins coins={coins} />
         </div>
       </div>
     </header>

@@ -33,7 +33,7 @@
     }
 
     & > :nth-child(3) {
-      @apply flex items-center justify-end ;
+      @apply flex items-start justify-end ;
     }
   }
 }

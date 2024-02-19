@@ -1,6 +1,6 @@
 import React, { CSSProperties, PropsWithChildren } from "react";
 
-type ButtonType = "blue" | "transparent" | "gray"
+export type ButtonType = "blue" | "transparent" | "gray"
 
 interface ButtonProps extends PropsWithChildren {
   action?: () => void;
