@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Coins, CoinsProps } from './Coins';
 import { Button } from './Button';
-
-interface HeaderProps {
-
-}
+import { Modal } from './Modal';
+import { Input } from './Input';
+import { Radio } from './Radio';
 
 const headerItems = [
   { path: '/mytasks', text: 'Мои задачи' },
@@ -18,7 +17,17 @@ const coins: CoinsProps = {
   hasBg: true,
 }
 
-export function Header(props: HeaderProps) {
+export function Header() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <header className="container mx-[auto] px-5">
       <div className="container-grid">
@@ -38,10 +47,30 @@ export function Header(props: HeaderProps) {
           ))}
         </nav>
         <div className="gap-2">
-          <Button type='arbitrary' style={{backgroundColor: "#0066ff", color: "white"}}>+ создать задачу</Button>
+          <Button type='arbitrary' style={{ backgroundColor: "#0066ff", color: "white" }} action={openModal}>+ создать задачу</Button>
           <Coins coins={coins} />
         </div>
       </div>
+      <Modal isOpen={isModalOpen} handleClose={closeModal}>
+        <div className="flex justify-between">
+          <h3 className='text-2xl'>Создать дело</h3>
+          <Button type='linkLike'>Подробное дело</Button>
+        </div>
+        <form action="/">
+          <Input placeholder='Название дела' name='taskName' wide />
+          <Input placeholder='Название дела' name='taskName' wide textarea />
+          <div className="flex">
+            <div className="flex flex-col">
+              <h4>Категория</h4>
+              <Radio label='Повышение квалификации' name='qualificationRise' />
+              <Radio label='Расширение кругозора' name='horizonRise' />
+            </div>
+            <div className="flex flex-col">
+              <h4>Значимость</h4>
+            </div>
+          </div>
+        </form>
+      </Modal>
     </header>
   );
 }
