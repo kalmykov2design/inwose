@@ -11,7 +11,7 @@ interface InputProps {
 
 export function Input(props: InputProps) {
   return (
-    <div>
+    <div className="flex flex-col">
       {props.label && <label htmlFor={props.name}>{props.label}</label>}
       {props.textarea
         ? <textarea

@@ -80,7 +80,7 @@ const mock = [
     title: "Подизайнить",
     type: "team",
     text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam recusandae quasi architecto dolore dolorum culpa, sed veritatis harum quos aspernatur corporis ratione eaque ipsa nihil hic enim repellendus rem maxime.",
-    timeLeft: 48385
+    timeLeft: 48381
   },
   {
     coins: {
@@ -93,7 +93,7 @@ const mock = [
     title: "Пососать жопу",
     type: "pari",
     text: "Нужно сделать дизайн главной страницы и страницы пари",
-    timeLeft: 9331553
+    timeLeft: 9331557
   },
   {
     coins: {
@@ -107,7 +107,7 @@ const mock = [
     title: "Заполнить заявку на дизайн выходные",
     type: "personal",
     text: "https://designweekend.ru",
-    timeLeft: 38
+    timeLeft: 382
   },
   {
     coins: {
@@ -120,6 +120,6 @@ const mock = [
     title: "Сверстать страницу \"Мои задачи\"",
     type: "personal",
     text: "<-- Время потраченное отмечено",
-    timeLeft: 16920
+    timeLeft: 16020
   },
 ]

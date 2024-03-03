@@ -28,6 +28,10 @@ export function Header() {
     setIsModalOpen(false);
   };
 
+  function setId() {
+    return Math.random().toString()
+  }
+
   return (
     <header className="container mx-[auto] px-5">
       <div className="container-grid">
@@ -58,16 +62,30 @@ export function Header() {
         </div>
         <form action="/">
           <Input placeholder='Название дела' name='taskName' wide />
-          <Input placeholder='Название дела' name='taskName' wide textarea />
-          <div className="flex">
+          <Input placeholder='Описание' name='taskName' wide textarea />
+          <div className="flex gap-8 mt-4">
             <div className="flex flex-col">
               <h4>Категория</h4>
-              <Radio label='Повышение квалификации' name='qualificationRise' />
-              <Radio label='Расширение кругозора' name='horizonRise' />
+              <Radio options={[
+                { label: 'Повышение квалификации', id: 'categoryRadio1', name: "categoryName" },
+                { label: 'Расширение кругозора', id: 'categoryRadio2', name: "categoryName" }
+              ]} />
             </div>
             <div className="flex flex-col">
               <h4>Значимость</h4>
+              <Radio options={[
+                { label: 'Большое', id: 'sizeRadio1', name: "sizeName" },
+                { label: 'Среднее', id: 'sizeRadio2', name: "sizeName" },
+                { label: 'Маленькое', id: 'sizeRadio3', name: "sizeName" },
+              ]} />
             </div>
+          </div>
+          <div className="mt-4 flex gap-2 items-end">
+            <Input name='deadline' label='Дедлайн' placeholder='Выбрать дату' />
+            <Input name='deadline' placeholder='Время на задачу' />
+          </div>
+          <div className="mt-4 flex justify-end">
+            <Button type='submit'>Готово</Button>
           </div>
         </form>
       </Modal>
