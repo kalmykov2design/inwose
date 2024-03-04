@@ -71,55 +71,15 @@ const mock = [
   },
   {
     coins: {
-      coinsAmount: 3,
+      coinsAmount: 10,
       hasBg: false,
       hasPlus: true,
       coinColor: "green"
-    },
-    size: "small",
-    title: "Подизайнить",
-    type: "team",
-    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam recusandae quasi architecto dolore dolorum culpa, sed veritatis harum quos aspernatur corporis ratione eaque ipsa nihil hic enim repellendus rem maxime.",
-    timeLeft: 48381
-  },
-  {
-    coins: {
-      coinsAmount: 14,
-      hasBg: false,
-      hasPlus: true,
-      coinColor: "green"
-    },
-    size: "large",
-    title: "Пососать жопу",
-    type: "pari",
-    text: "Нужно сделать дизайн главной страницы и страницы пари",
-    timeLeft: 9331557
-  },
-  {
-    coins: {
-      coinsAmount: 6,
-      hasBg: false,
-      hasPlus: true,
-      coinsNotEarnedAmount: 12,
-      coinColor: "red"
     },
     size: "medium",
-    title: "Заполнить заявку на дизайн выходные",
-    type: "personal",
-    text: "https://designweekend.ru",
-    timeLeft: 382
-  },
-  {
-    coins: {
-      coinsAmount: 20,
-      hasBg: false,
-      hasPlus: true,
-      coinColor: "green"
-    },
-    size: "large",
-    title: "Сверстать страницу \"Мои задачи\"",
+    title: "Сверстать окошко Создание дела",
     type: "personal",
     text: "<-- Время потраченное отмечено",
-    timeLeft: 16020
+    timeLeft: 10820
   },
 ]
