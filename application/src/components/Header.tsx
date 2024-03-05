@@ -33,16 +33,22 @@ export function Header() {
     e.preventDefault();
     const formData = e.currentTarget.elements;
 
+    console.log(formData);
+
     // Преобразование значений полей в массив
-    const formValuesArray = Array.from(formData).map((element) => {
-        if (element instanceof HTMLInputElement || element instanceof HTMLTextAreaElement) {
-            return { name: element.name, value: (element as HTMLInputElement | HTMLTextAreaElement).value };
-        } else if (element instanceof HTMLSelectElement) {
-            return { name: element.name, value: (element as HTMLSelectElement).options[(element as HTMLSelectElement).selectedIndex].value };
-        } else {
-            return { name: '', value: '' };
+    const formValuesArray: { name: string, value: string }[] = Array.from(formData).reduce((acc: { name: string, value: string }[], element) => {
+      if (element instanceof HTMLInputElement || element instanceof HTMLTextAreaElement) {
+        if (element instanceof HTMLInputElement && (element.type !== 'radio' || (element.type === 'radio' && element.checked))) {
+          acc.push({ name: element.getAttribute('name') || '', value: (element as HTMLInputElement | HTMLTextAreaElement).value });
+        } else if (element instanceof HTMLTextAreaElement) {
+          acc.push({ name: element.getAttribute('name') || '', value: (element as HTMLInputElement | HTMLTextAreaElement).value });
         }
-    });
+      } else if (element instanceof HTMLSelectElement) {
+        acc.push({ name: element.getAttribute('name') || '', value: (element as HTMLSelectElement).options[(element as HTMLSelectElement).selectedIndex].value });
+      }
+
+      return acc;
+    }, []);
 
     console.log(formValuesArray); // Вывод значений в массиве в консоль
     createTask('Новая задача', 'Описание новой задачи');
