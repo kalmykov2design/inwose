@@ -5,6 +5,7 @@ import { Button } from './Button';
 import { Modal } from './Modal';
 import { Input } from './Input';
 import { Radio } from './Radio';
+import { createTask, updateTask } from '../api/api';
 
 const headerItems = [
   { path: '/mytasks', text: 'Мои задачи' },
@@ -28,8 +29,23 @@ export function Header() {
     setIsModalOpen(false);
   };
 
-  function setId() {
-    return Math.random().toString()
+  function formSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const formData = e.currentTarget.elements;
+
+    // Преобразование значений полей в массив
+    const formValuesArray = Array.from(formData).map((element) => {
+        if (element instanceof HTMLInputElement || element instanceof HTMLTextAreaElement) {
+            return { name: element.name, value: (element as HTMLInputElement | HTMLTextAreaElement).value };
+        } else if (element instanceof HTMLSelectElement) {
+            return { name: element.name, value: (element as HTMLSelectElement).options[(element as HTMLSelectElement).selectedIndex].value };
+        } else {
+            return { name: '', value: '' };
+        }
+    });
+
+    console.log(formValuesArray); // Вывод значений в массиве в консоль
+    createTask('Новая задача', 'Описание новой задачи');
   }
 
   return (
@@ -55,14 +71,16 @@ export function Header() {
           <Coins coins={coins} />
         </div>
       </div>
+
+
       <Modal isOpen={isModalOpen} handleClose={closeModal}>
         <div className="flex justify-between">
           <h3 className='text-2xl'>Создать дело</h3>
           <Button type='linkLike'>Подробное дело</Button>
         </div>
-        <form action="/">
+        <form action="/" onSubmit={e => formSubmit(e)}>
           <Input placeholder='Название дела' name='taskName' wide />
-          <Input placeholder='Описание' name='taskName' wide textarea />
+          <Input placeholder='Описание' name='taskDescr' wide textarea />
           <div className="flex gap-8 mt-4">
             <div className="flex flex-col">
               <h4>Категория</h4>

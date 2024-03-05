@@ -3,6 +3,7 @@ import "./App.css";
 import { MyTasksPage } from "./pages/MyTasksPage";
 import { LoginPage } from "./pages/LoginPage";
 import { PariPage } from "./pages/PariPage";
+import { getAllTasks } from "./api/api";
 
 export function App() {
   return (
@@ -83,3 +84,7 @@ const mock = [
     timeLeft: 10820
   },
 ]
+
+const hui = getAllTasks();
+
+console.log(hui);
