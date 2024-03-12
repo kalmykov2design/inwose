@@ -5,6 +5,7 @@ export interface RadioOption {
   id: string;
   checked?: boolean;
   name: string;
+  value: string;
 }
 
 export interface RadioProps {
@@ -25,6 +26,7 @@ export function Radio(props: RadioProps) {
           <input
             type="radio"
             className="w-0 h-0 opacity-0 -mr-2"
+            value={option.value}
             checked={selectedOption === option.id}
             onChange={() => handleOptionChange(option.id)}
             name={option.name}

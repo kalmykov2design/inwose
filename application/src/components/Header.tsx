@@ -5,7 +5,7 @@ import { Button } from './Button';
 import { Modal } from './Modal';
 import { Input } from './Input';
 import { Radio } from './Radio';
-import { createTask, updateTask } from '../api/api';
+import { createTask } from '../api/api';
 
 const headerItems = [
   { path: '/mytasks', text: 'Мои задачи' },
@@ -31,27 +31,17 @@ export function Header() {
 
   function formSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const formData = e.currentTarget.elements;
+    
+    const formData = new FormData(e.currentTarget);    
+    const obj: any = {}
 
-    console.log(formData);
+    for (const [key, value] of formData) {
+      obj[key] = value
+    }
 
-    // Преобразование значений полей в массив
-    const formValuesArray: { name: string, value: string }[] = Array.from(formData).reduce((acc: { name: string, value: string }[], element) => {
-      if (element instanceof HTMLInputElement || element instanceof HTMLTextAreaElement) {
-        if (element instanceof HTMLInputElement && (element.type !== 'radio' || (element.type === 'radio' && element.checked))) {
-          acc.push({ name: element.getAttribute('name') || '', value: (element as HTMLInputElement | HTMLTextAreaElement).value });
-        } else if (element instanceof HTMLTextAreaElement) {
-          acc.push({ name: element.getAttribute('name') || '', value: (element as HTMLInputElement | HTMLTextAreaElement).value });
-        }
-      } else if (element instanceof HTMLSelectElement) {
-        acc.push({ name: element.getAttribute('name') || '', value: (element as HTMLSelectElement).options[(element as HTMLSelectElement).selectedIndex].value });
-      }
-
-      return acc;
-    }, []);
-
-    console.log(formValuesArray); // Вывод значений в массиве в консоль
-    createTask('Новая задача', 'Описание новой задачи');
+    console.log(obj);
+   
+    createTask(obj);
   }
 
   return (
@@ -91,22 +81,22 @@ export function Header() {
             <div className="flex flex-col">
               <h4>Категория</h4>
               <Radio options={[
-                { label: 'Повышение квалификации', id: 'categoryRadio1', name: "categoryName" },
-                { label: 'Расширение кругозора', id: 'categoryRadio2', name: "categoryName" }
+                { label: 'Повышение квалификации', id: 'categoryRadio1', name: "categoryName", value: "qualification" },
+                { label: 'Расширение кругозора', id: 'categoryRadio2', name: "categoryName", value: "outlook" }
               ]} />
             </div>
             <div className="flex flex-col">
               <h4>Значимость</h4>
               <Radio options={[
-                { label: 'Большое', id: 'sizeRadio1', name: "sizeName" },
-                { label: 'Среднее', id: 'sizeRadio2', name: "sizeName" },
-                { label: 'Маленькое', id: 'sizeRadio3', name: "sizeName" },
+                { label: 'Большое', id: 'sizeRadio1', name: "sizeName", value: "lg" },
+                { label: 'Среднее', id: 'sizeRadio2', name: "sizeName", value: "md" },
+                { label: 'Маленькое', id: 'sizeRadio3', name: "sizeName", value: "sm" },
               ]} />
             </div>
           </div>
           <div className="mt-4 flex gap-2 items-end">
             <Input name='deadline' label='Дедлайн' placeholder='Выбрать дату' />
-            <Input name='deadline' placeholder='Время на задачу' />
+            <Input name='timeForTask' placeholder='Время на задачу' />
           </div>
           <div className="mt-4 flex justify-end">
             <Button type='submit'>Готово</Button>

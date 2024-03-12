@@ -83,6 +83,19 @@ const mock = [
     text: "<-- Время потраченное отмечено",
     timeLeft: 10820
   },
+  {
+    coins: {
+      coinsAmount: 30,
+      hasBg: false,
+      hasPlus: true,
+      coinColor: "green"
+    },
+    size: "large",
+    title: "Создать базу данных и прикрутить туда ORM для удобной работы (ха-ха)((помогите))",
+    type: "personal",
+    text: "<-- Время потраченное отмечено",
+    timeLeft: 7200
+  },
 ]
 
 const hui = getAllTasks();
