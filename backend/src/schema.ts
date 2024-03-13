@@ -5,7 +5,7 @@ export const tasks = sqliteTable("tasks", {
   categoryName: text('category_name').notNull(),
   deadline: text('deadline').notNull(),
   sizeName: text('size_name').notNull(),
-  taskDescr: text('task_descr').notNull(),
+  taskDescr: text('task_descr'),
   taskName: text('task_name').notNull(),
   timeForTask: text('time_for_task').notNull(),
 });

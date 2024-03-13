@@ -1,9 +1,11 @@
+import React from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import { MyTasksPage } from "./pages/MyTasksPage";
 import { LoginPage } from "./pages/LoginPage";
 import { PariPage } from "./pages/PariPage";
 import { getAllTasks } from "./api/api";
+import { TaskProps } from "./components/Task";
 
 export function App() {
   return (
@@ -11,12 +13,12 @@ export function App() {
       <Route path="/" element={<LoginPage />} />
       <Route path="/mytasks" element={<MyTasksPage data={mock} />} />
       <Route path="/pari" element={<PariPage />} />
-      <Route path="/team" element={<MyTasksPage />} />
+      <Route path="/team" element={<MyTasksPage data={mock} />} />
     </Routes>
   );
 }
 
-const mock = [
+const mock: TaskProps[] = [
   {
     coins: {
       coinsAmount: 3,
@@ -28,7 +30,8 @@ const mock = [
     title: "Подизайнить",
     type: "team",
     text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam recusandae quasi architecto dolore dolorum culpa, sed veritatis harum quos aspernatur corporis ratione eaque ipsa nihil hic enim repellendus rem maxime.",
-    timeLeft: 48385
+    timeLeft: 48385,
+    category: "qualification"
   },
   {
     coins: {
@@ -41,7 +44,8 @@ const mock = [
     title: "Пососать жопу",
     type: "pari",
     text: "Нужно сделать дизайн главной страницы и страницы пари",
-    timeLeft: 9331553
+    timeLeft: 9331553,
+    category: "qualification"
   },
   {
     coins: {
@@ -55,7 +59,8 @@ const mock = [
     title: "Заполнить заявку на дизайн выходные",
     type: "personal",
     text: "https://designweekend.ru",
-    timeLeft: 38
+    timeLeft: 38,
+    category: "outlook"
   },
   {
     coins: {
@@ -68,7 +73,8 @@ const mock = [
     title: "Сверстать страницу \"Мои задачи\"",
     type: "personal",
     text: "<-- Время потраченное отмечено",
-    timeLeft: 16920
+    timeLeft: 16920,
+    category: "qualification"
   },
   {
     coins: {
@@ -81,7 +87,8 @@ const mock = [
     title: "Сверстать окошко Создание дела",
     type: "personal",
     text: "<-- Время потраченное отмечено",
-    timeLeft: 10820
+    timeLeft: 10820,
+    category: "qualification"
   },
   {
     coins: {
@@ -94,7 +101,8 @@ const mock = [
     title: "Создать базу данных и прикрутить туда ORM для удобной работы (ха-ха)((помогите))",
     type: "personal",
     text: "<-- Время потраченное отмечено",
-    timeLeft: 7200
+    timeLeft: 7200,
+    category: "qualification"
   },
 ]
 

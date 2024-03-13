@@ -1,9 +1,10 @@
 import React from "react";
-import { CoinColors, Coins, CoinsProps } from "./Coins";
-import { Button, ButtonType } from "./Button";
+import { Coins, CoinsProps } from "./Coins";
+import { Button } from "./Button";
 import { Size, SizeType } from "./Size";
 
 export type TaskType = "personal" | "pari" | "team"
+export type TaskCategory = "qualification" | "outlook"
 
 export interface TaskProps {
   title: string;
@@ -12,23 +13,30 @@ export interface TaskProps {
   size: SizeType;
   coins: CoinsProps;
   type: TaskType;
+  category: TaskCategory;
 }
 
 export function Task(props: TaskProps) {
   const { type = "personal" } = props;
   const time = formatTime(props.timeLeft ? props.timeLeft : 0);
+  const category = drawCategory(props.category)
+  const coins = props.coins;
+  coins.coinsAmount = coinsAmount(props.size, props.category)
 
   return (
     <div className="container-grid mb-4 bg-gray-100 rounded-lg">
       <div>
-        <div className="font-medium">{time}</div>
-        <Size size={props.size} />
+        <div className="grid grid-cols-2">
+          <div className="font-medium">{time}</div>
+          <Size size={props.size} />
+        </div>
+        <h3 className="font-medium mt-4" style={{ color: category.color }}>{category.text}</h3>
       </div>
       <div className="flex flex-col border-l-4 border-[#0066FF]">
         <h3 className="font-medium text-xl mb-4">{props.title}</h3>
         <p>{props.text}</p>
       </div>
-      <div className="">
+      <div>
         <div className="flex justify-between items-center w-[290px]">
           {createButtons(type)}
           <Coins coins={props.coins} />
@@ -37,6 +45,23 @@ export function Task(props: TaskProps) {
     </div>
   )
 };
+
+function coinsAmount(size: SizeType, category: TaskCategory) {
+  let categoryCost = 0;
+  let sizeCost = 0;
+
+  if (category === "qualification") {
+    categoryCost = 5
+  } else { categoryCost = 3 }
+
+  if (size === "large") {
+    sizeCost = 4
+  } else if (size === "medium") {
+    sizeCost = 3
+  } else { sizeCost = 2 }
+
+  return categoryCost * sizeCost
+}
 
 function formatTime(seconds: number) {
   const days = Math.floor(seconds / (60 * 60 * 24));
@@ -89,5 +114,14 @@ function createButtons(type: TaskType) {
 
     default:
       break;
+  }
+}
+
+function drawCategory(category: TaskCategory) {
+  switch (category) {
+    case "qualification":
+      return { text: "Повышение квалификации", color: "#0066ff" }
+    case "outlook":
+      return { text: "Расширение кругозора", color: "#08b908" }
   }
 }
