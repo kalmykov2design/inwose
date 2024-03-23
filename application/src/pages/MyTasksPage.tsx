@@ -11,7 +11,7 @@ export function MyTasksPage(props: MyTasksPageProps) {
     <PageWrapper>
       <div className="container-grid">
         <div className="grid grid-cols-2">
-          <div>осталось</div>
+          <div>время</div>
           <div>размер</div>
         </div>
         <div>задачи</div>
@@ -24,6 +24,7 @@ export function MyTasksPage(props: MyTasksPageProps) {
           type={task.type}
           text={task.text}
           timeLeft={task.timeLeft}
+          timePassed={task.timePassed}
           category={task.category}
           key={"task" + task.timeLeft}
         />

@@ -72,8 +72,8 @@ const mock: TaskProps[] = [
     size: "large",
     title: "Сверстать страницу \"Мои задачи\"",
     type: "personal",
-    text: "<-- Время потраченное отмечено",
-    timeLeft: 16920,
+    text: "",
+    timePassed: 16920,
     category: "qualification"
   },
   {
@@ -86,8 +86,8 @@ const mock: TaskProps[] = [
     size: "medium",
     title: "Сверстать окошко Создание дела",
     type: "personal",
-    text: "<-- Время потраченное отмечено",
-    timeLeft: 10820,
+    text: "Ну тут всё понятно",
+    timePassed: 10820,
     category: "qualification"
   },
   {
@@ -98,10 +98,10 @@ const mock: TaskProps[] = [
       coinColor: "green"
     },
     size: "large",
-    title: "Создать базу данных и прикрутить туда ORM для удобной работы (ха-ха)((помогите))",
+    title: "Создать базу данных и прикрутить туда ORM",
     type: "personal",
-    text: "<-- Время потраченное отмечено",
-    timeLeft: 7200,
+    text: "Жесть ваще, как тебя ведать?",
+    timePassed: 7200,
     category: "qualification"
   },
 ]

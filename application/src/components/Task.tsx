@@ -10,6 +10,7 @@ export interface TaskProps {
   title: string;
   text?: string;
   timeLeft?: number;
+  timePassed?: number;
   size: SizeType;
   coins: CoinsProps;
   type: TaskType;
@@ -18,7 +19,8 @@ export interface TaskProps {
 
 export function Task(props: TaskProps) {
   const { type = "personal" } = props;
-  const time = formatTime(props.timeLeft ? props.timeLeft : 0);
+  const timeLeft = formatTime(props.timeLeft ? props.timeLeft : 0);
+  const timePassed = formatTime(props.timePassed ? props.timePassed : 0);
   const category = drawCategory(props.category)
   const coins = props.coins;
   coins.coinsAmount = coinsAmount(props.size, props.category)
@@ -27,7 +29,8 @@ export function Task(props: TaskProps) {
     <div className="container-grid mb-4 bg-gray-100 rounded-lg">
       <div>
         <div className="grid grid-cols-2">
-          <div className="font-medium">{time}</div>
+          {props.timeLeft &&  <b>Осталось: <br />{timeLeft}</b>}
+          {props.timePassed && <b>Прошло: <br />{timePassed}</b>}
           <Size size={props.size} />
         </div>
         <h3 className="font-medium mt-4" style={{ color: category.color }}>{category.text}</h3>

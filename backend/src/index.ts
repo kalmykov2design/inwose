@@ -21,7 +21,7 @@ app.use((req, res, next) => {
 
 // Создание карточки задачи
 app.post("/tasks", async (req, res) => {
-  const { categoryName, deadline, sizeName, taskDescr, taskName, timeForTask } = req.body;
+  const { categoryName, deadline, sizeName, taskDescr, taskName, timeForTask, timeSpent} = req.body;
   const newTask = {
     taskName,
     taskDescr,
@@ -29,6 +29,7 @@ app.post("/tasks", async (req, res) => {
     sizeName,
     deadline,
     timeForTask,
+    timeSpent
   };
   await db.insert(tasks).values(newTask)
   res.status(201).json(newTask);

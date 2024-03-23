@@ -8,4 +8,5 @@ export const tasks = sqliteTable("tasks", {
   taskDescr: text('task_descr'),
   taskName: text('task_name').notNull(),
   timeForTask: text('time_for_task').notNull(),
+  timeSpent: text('time_for_task').notNull(),
 });
