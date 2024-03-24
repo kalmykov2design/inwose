@@ -5,15 +5,8 @@
     {
       "idx": 0,
       "version": "5",
-      "when": 1710271829115,
-      "tag": "0000_bored_millenium_guard",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "5",
-      "when": 1710272313329,
-      "tag": "0001_eager_triathlon",
+      "when": 1711297257754,
+      "tag": "0000_equal_mimic",
       "breakpoints": true
     }
   ]

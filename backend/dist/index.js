@@ -31,14 +31,17 @@ app.use((req, res, next) => {
 });
 // Создание карточки задачи
 app.post("/tasks", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { categoryName, deadline, sizeName, taskDescr, taskName, timeForTask } = req.body;
+    const { categoryName, deadline, dateOfComplete, sizeName, taskDescr, taskName, taskStatus, taskType, timeForComplete, } = req.body;
     const newTask = {
-        taskName,
-        taskDescr,
         categoryName,
-        sizeName,
         deadline,
-        timeForTask,
+        dateOfComplete,
+        sizeName,
+        taskDescr,
+        taskName,
+        taskStatus,
+        taskType,
+        timeForComplete,
     };
     yield db.insert(schema_1.tasks).values(newTask);
     res.status(201).json(newTask);

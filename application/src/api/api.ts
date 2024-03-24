@@ -8,6 +8,8 @@ export interface CreateTaskProps {
 }
 
 export const createTask = async (body: CreateTaskProps) => {
+  console.log(body);
+  
   const response = await fetch("http://localhost:3000/tasks", {
     method: "POST",
     headers: {

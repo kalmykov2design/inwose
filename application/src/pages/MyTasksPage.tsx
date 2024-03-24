@@ -26,7 +26,7 @@ export function MyTasksPage(props: MyTasksPageProps) {
           timeLeft={task.timeLeft}
           timePassed={task.timePassed}
           category={task.category}
-          key={"task" + task.timeLeft}
+          key={"task" + task.timeLeft + task.timePassed}
         />
 
       ))}

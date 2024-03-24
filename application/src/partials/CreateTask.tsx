@@ -37,17 +37,16 @@ export function CreateTask(props: CreateTaskProps) {
     createTask(obj);
   }
 
-
   return (
     <>
       <div className="flex justify-between">
-        <h3 className='text-2xl'>Создать задачу</h3>
+        <h2>Создать задачу</h2>
         <Button type='linkLike'>Подробное дело</Button>
       </div>
       <form action="/" onSubmit={e => formSubmit(e)}>
         <Input placeholder='Название дела' name='taskName' wide />
         <Input placeholder='Описание' name='taskDescr' wide textarea />
-        <div className="flex gap-8 mt-4">
+        <div className="grid grid-cols-2 gap-8 mt-4">
           <div className="flex flex-col">
             <h4>Категория</h4>
             <Radio options={[
@@ -64,7 +63,7 @@ export function CreateTask(props: CreateTaskProps) {
             ]} />
           </div>
         </div>
-        <div className="flex gap-8 mt-4">
+        <div className="grid grid-cols-2 gap-8 mt-4">
           <div className="flex flex-col">
             <h4>Вид</h4>
             <Radio onChange={(value) => onTypeChange(value)} options={[

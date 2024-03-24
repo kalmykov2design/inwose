@@ -29,11 +29,11 @@ export function Task(props: TaskProps) {
     <div className="container-grid mb-4 bg-gray-100 rounded-lg">
       <div>
         <div className="grid grid-cols-2">
-          {props.timeLeft &&  <b>Осталось: <br />{timeLeft}</b>}
-          {props.timePassed && <b>Прошло: <br />{timePassed}</b>}
+          {props.timeLeft && <div>Осталось: <br /><b>{timeLeft}</b></div>}
+          {props.timePassed && <div>Прошло: <br /><b>{timePassed}</b></div>}
           <Size size={props.size} />
         </div>
-        <h3 className="font-medium mt-4" style={{ color: category.color }}>{category.text}</h3>
+        <div className="font-medium mt-4" style={{ color: category.color }}>{category.text}</div>
       </div>
       <div className="flex flex-col border-l-4 border-[#0066FF]">
         <h3 className="font-medium text-xl mb-4">{props.title}</h3>
