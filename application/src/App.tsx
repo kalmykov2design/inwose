@@ -105,7 +105,3 @@ const mock: TaskProps[] = [
     category: "qualification"
   },
 ]
-
-const hui = getAllTasks();
-
-console.log(hui);

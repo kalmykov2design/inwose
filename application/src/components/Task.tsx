@@ -23,6 +23,8 @@ export function Task(props: TaskProps) {
   const timePassed = formatTime(props.timePassed ? props.timePassed : 0);
   const category = drawCategory(props.category)
   const coins = props.coins;
+  console.log(props);
+  
   coins.coinsAmount = coinsAmount(props.size, props.category)
 
   return (
