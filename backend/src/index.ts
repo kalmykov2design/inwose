@@ -51,7 +51,7 @@ app.post("/tasks", async (req, res) => {
 app.get("/tasks", async (req, res) => {
   console.log("Обработка запроса на получение списка задач");
   const x = await db.select().from(tasks)
-  res.json(x);
+  return res.json(x);
 });
 
 // Изменение карточки задачи

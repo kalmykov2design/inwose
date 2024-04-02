@@ -18,40 +18,41 @@ export interface TaskProps {
 }
 
 export function Task(props: TaskProps) {
-  const { type = "personal" } = props;
-  const timeLeft = formatTime(props.timeLeft ? props.timeLeft : 0);
-  const timePassed = formatTime(props.timePassed ? props.timePassed : 0);
-  const category = drawCategory(props.category)
-  const coins = props.coins;
+  const { type = "personal", timeLeft, timePassed, category, coins, size, text, title } = props;
+
+  const formattedTimeLeft = timeLeft ? formatTime(timeLeft) : '';
+  const formattedTimePassed = timePassed ? formatTime(timePassed) : '';
+  const calculatedCoins = coins ? determineCoinsAmount(size, category) : 0;
+
+  const formattedCategory = category ? drawCategory(category) : { color: 'black', text: 'Uncategorized' };
   console.log(props);
   
-  coins.coinsAmount = coinsAmount(props.size, props.category)
 
   return (
     <div className="container-grid mb-4 bg-gray-100 rounded-lg">
       <div>
         <div className="grid grid-cols-2">
-          {props.timeLeft && <div>Осталось: <br /><b>{timeLeft}</b></div>}
-          {props.timePassed && <div>Прошло: <br /><b>{timePassed}</b></div>}
-          <Size size={props.size} />
+          {timeLeft && <div>Осталось: <br /><b>{formattedTimeLeft}</b></div>}
+          {timePassed && <div>Прошло: <br /><b>{formattedTimePassed}</b></div>}
+          {size && <Size size={size} />}
         </div>
-        <div className="font-medium mt-4" style={{ color: category.color }}>{category.text}</div>
+        <div className="font-medium mt-4" style={{ color: formattedCategory.color }}>{formattedCategory.text}</div>
       </div>
       <div className="flex flex-col border-l-4 border-[#0066FF]">
-        <h3 className="font-medium text-xl mb-4">{props.title}</h3>
-        <p>{props.text}</p>
+        <h3 className="font-medium text-xl mb-4">{title}</h3>
+        <p>{text}</p>
       </div>
       <div>
         <div className="flex justify-between items-center w-[290px]">
           {createButtons(type)}
-          <Coins coins={props.coins} />
+          {coins && <Coins coins={coins} />}
         </div>
       </div>
     </div>
   )
 };
 
-function coinsAmount(size: SizeType, category: TaskCategory) {
+function determineCoinsAmount(size: SizeType, category: TaskCategory) {
   let categoryCost = 0;
   let sizeCost = 0;
 

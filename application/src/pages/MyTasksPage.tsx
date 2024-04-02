@@ -1,19 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { PageWrapper } from "../components/PageWrapper";
 import { Task, TaskProps } from "../components/Task";
 import useFetch from "../utils/useFetch";
+import { getAllTasks } from "../api/api";
 interface MyTasksPageProps {
   data: TaskProps[];
 }
 
 export function MyTasksPage(props: MyTasksPageProps) {
-  const { data, loading, error } = useFetch('http://localhost:3000/tasks')
-  if (!loading && data) {
-    console.log("DATA", data);
-    data.map(task => {
-      console.log(task);
-    })
-  }
+
+  const [tasks, setTasks] = useState<TaskProps[]>([]); // Инициализируем состояние для хранения данных
+
+  useEffect(() => {
+      const fetchData = async () => {
+          try {
+              const data = await getAllTasks(); // Вызываем функцию getAllTasks() для получения данных
+              setTasks(data); // Сохраняем полученные данные в состоянии
+          } catch (error) {
+              console.error(error); // Обработка ошибок, если запрос не выполнен успешно
+          }
+      };
+
+      fetchData(); // Вызываем функцию для загрузки данных при монтировании компонента
+  }, []); // Пустой массив зависимостей для вызова useEffect только один раз
+
+  tasks.length > 0 ? console.log(tasks) : console.log("Loading..."); // Выводим данные в консоль, если задачи есть
+  
+  
 
   return (
     <PageWrapper>
@@ -24,8 +37,7 @@ export function MyTasksPage(props: MyTasksPageProps) {
         </div>
         <div>задачи</div>
       </div>
-      {loading && ("loading...")}
-      {/* {!loading && data && data.map(task => (
+      {tasks.length > 0 ? tasks.map(task => (
         <Task
           coins={task.coins}
           size={task.size}
@@ -38,8 +50,7 @@ export function MyTasksPage(props: MyTasksPageProps) {
           key={"task" + task.timeLeft + task.timePassed}
         />
 
-      ))} */}
-      {error && (error)}
+      )) : (<p>Loading...</p>)}
     </PageWrapper>
   )
 };

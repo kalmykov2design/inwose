@@ -50,7 +50,7 @@ app.post("/tasks", (req, res) => __awaiter(void 0, void 0, void 0, function* () 
 app.get("/tasks", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log("Обработка запроса на получение списка задач");
     const x = yield db.select().from(schema_1.tasks);
-    res.json(x);
+    return res.json(x);
 }));
 // Изменение карточки задачи
 // app.put("/tasks/:id", (req, res) => {
