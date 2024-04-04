@@ -44,7 +44,7 @@ export function Task(taskProps: {data: TaskProps}) {
       <div>
         <div className="flex justify-between items-center w-[290px]">
           {createButtons(taskType)}
-          <Coins coins={calculateCoins()} />
+          <Coins coins={calculateCoins(props.sizeName, props.categoryName)} />
         </div>
       </div>
     </div>
@@ -53,10 +53,12 @@ export function Task(taskProps: {data: TaskProps}) {
 
 
 
-function calculateCoins(): CoinsProps {
+function calculateCoins(size: SizeType, category: TaskCategory): CoinsProps {
   
+  const calculatedCoins = determineCoinsAmount(size, category)
+
   const coins: CoinsProps = {
-    coinsAmount: 10,
+    coinsAmount: calculatedCoins,
     hasBg: false,
     hasPlus: true,
     coinColor: "green",

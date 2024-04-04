@@ -89,7 +89,7 @@ export function CreateTask(props: CreateTaskProps) {
         {!isUpcoming && (
           <div className="mt-4 flex gap-2 items-end">
             <Input name='dateOfComplete' label='Дата выполнения' defaultValue={dateNowStr} placeholder='Выбрать дату' />
-            <Input name='timeForCompleted' label='Время (ч)' placeholder='Затраченное время' />
+            <Input name='timeForComplete' label='Время (ч)' placeholder='Затраченное время' />
           </div>
         )}
         <div className="mt-4 flex justify-end">
