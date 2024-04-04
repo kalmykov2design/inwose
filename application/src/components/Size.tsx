@@ -1,6 +1,6 @@
 import React from "react";
 
-export type SizeType = "small" | "medium" | "large";
+export type SizeType = "sm" | "md" | "lg";
 
 interface SizeProps {
   size: SizeType;
@@ -16,19 +16,19 @@ export function Size(props: SizeProps) {
 
 function picSwitch(size: SizeType) {
   switch (size) {
-    case "small":
+    case "sm":
       return (<>
         <div className={`bg-[url(/small_task.png)] bg-center bg-no-repeat w-6 h-6`}></div>
         <span>Small</span>
       </>
       )
-    case "medium":
+    case "md":
       return (<>
         <div className={`bg-[url(/medium_task.png)] bg-center bg-no-repeat w-6 h-6`}></div>
         <span>Medium</span>
       </>
       )
-    case "large":
+    case "lg":
       return (<>
         <div className={`bg-[url(/large_task.png)] bg-center bg-no-repeat w-6 h-6`}></div>
         <span>Large</span>

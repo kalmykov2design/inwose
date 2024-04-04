@@ -7,50 +7,62 @@ export type TaskType = "personal" | "pari" | "team"
 export type TaskCategory = "qualification" | "outlook"
 
 export interface TaskProps {
-  title: string;
-  text?: string;
-  timeLeft?: number;
-  timePassed?: number;
-  size: SizeType;
+  taskName: string;
+  taskDescr?: string;
+  deadline?: number;
+  sizeName: SizeType;
   coins: CoinsProps;
-  type: TaskType;
-  category: TaskCategory;
+  taskType: TaskType;
+  dateOfComplete: string;
+  categoryName: TaskCategory;
+  taskStatus: string;
+  timeForComplete?: string;
 }
 
-export function Task(props: TaskProps) {
-  const { type = "personal", timeLeft, timePassed, category, coins, size, text, title } = props;
 
-  const formattedTimeLeft = timeLeft ? formatTime(timeLeft) : '';
-  const formattedTimePassed = timePassed ? formatTime(timePassed) : '';
-  const calculatedCoins = coins ? determineCoinsAmount(size, category) : 0;
+export function Task(taskProps: {data: TaskProps}) {
+  const { taskType = "personal" } = taskProps.data;
+  const props = taskProps.data;
 
-  const formattedCategory = category ? drawCategory(category) : { color: 'black', text: 'Uncategorized' };
+  const formattedCategory = drawCategory(props.categoryName)
   console.log(props);
-  
 
   return (
     <div className="container-grid mb-4 bg-gray-100 rounded-lg">
       <div>
         <div className="grid grid-cols-2">
-          {timeLeft && <div>Осталось: <br /><b>{formattedTimeLeft}</b></div>}
-          {timePassed && <div>Прошло: <br /><b>{formattedTimePassed}</b></div>}
-          {size && <Size size={size} />}
+          {props.deadline && <div>Осталось: <br /><b>{props.deadline}</b></div>}
+          {props.timeForComplete && <div>Прошло: <br /><b>{props.timeForComplete}</b></div>}
+          {props.sizeName && <Size size={props.sizeName} />}
         </div>
         <div className="font-medium mt-4" style={{ color: formattedCategory.color }}>{formattedCategory.text}</div>
       </div>
       <div className="flex flex-col border-l-4 border-[#0066FF]">
-        <h3 className="font-medium text-xl mb-4">{title}</h3>
-        <p>{text}</p>
+        <h3 className="font-medium text-xl mb-4">{props.taskName}</h3>
+        <p>{props.taskDescr}</p>
       </div>
       <div>
         <div className="flex justify-between items-center w-[290px]">
-          {createButtons(type)}
-          {coins && <Coins coins={coins} />}
+          {createButtons(taskType)}
+          <Coins coins={calculateCoins()} />
         </div>
       </div>
     </div>
   )
 };
+
+
+
+function calculateCoins(): CoinsProps {
+  
+  const coins: CoinsProps = {
+    coinsAmount: 10,
+    hasBg: false,
+    hasPlus: true,
+    coinColor: "green",
+  }
+  return coins
+}
 
 function determineCoinsAmount(size: SizeType, category: TaskCategory) {
   let categoryCost = 0;
@@ -60,9 +72,9 @@ function determineCoinsAmount(size: SizeType, category: TaskCategory) {
     categoryCost = 5
   } else { categoryCost = 3 }
 
-  if (size === "large") {
+  if (size === "lg") {
     sizeCost = 4
-  } else if (size === "medium") {
+  } else if (size === "md") {
     sizeCost = 3
   } else { sizeCost = 2 }
 
@@ -123,8 +135,8 @@ function createButtons(type: TaskType) {
   }
 }
 
-function drawCategory(category: TaskCategory) {
-  switch (category) {
+function drawCategory(categoryName: TaskCategory) {
+  switch (categoryName) {
     case "qualification":
       return { text: "Повышение квалификации", color: "#0066ff" }
     case "outlook":

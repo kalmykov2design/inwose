@@ -39,15 +39,8 @@ export function MyTasksPage(props: MyTasksPageProps) {
       </div>
       {tasks.length > 0 ? tasks.map(task => (
         <Task
-          coins={task.coins}
-          size={task.size}
-          title={task.title}
-          type={task.type}
-          text={task.text}
-          timeLeft={task.timeLeft}
-          timePassed={task.timePassed}
-          category={task.category}
-          key={"task" + task.timeLeft + task.timePassed}
+          data={task}
+          key={"task" + task.deadline + task.timeForComplete}
         />
 
       )) : (<p>Loading...</p>)}
