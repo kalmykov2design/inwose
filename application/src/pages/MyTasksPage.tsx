@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { PageWrapper } from "../components/PageWrapper";
 import { Task, TaskProps } from "../components/Task";
-import useFetch from "../utils/useFetch";
 import { getAllTasks } from "../api/api";
 interface MyTasksPageProps {
   data: TaskProps[];
@@ -39,8 +38,7 @@ export function MyTasksPage(props: MyTasksPageProps) {
       </div>
       {tasks.length > 0 ? tasks.map(task => (
         <Task
-          data={task}
-          key={"task" + task.deadline + task.timeForComplete}
+          {...task}
         />
 
       )) : (<p>Loading...</p>)}
