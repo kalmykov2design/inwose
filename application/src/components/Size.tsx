@@ -1,6 +1,5 @@
 import React from "react";
-
-export type SizeType = "sm" | "md" | "lg";
+import { SizeType } from "../types/types";
 
 interface SizeProps {
   size: SizeType;

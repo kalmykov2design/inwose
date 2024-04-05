@@ -1,14 +1,6 @@
 import React from "react";
+import { CoinsProps } from "../types/types";
 
-export type CoinColors = "green" | "red"
-
-export interface CoinsProps {
-  hasPlus?: boolean;
-  hasBg?: boolean;
-  coinsAmount: number;
-  coinsNotEarnedAmount?: number;
-  coinColor?: CoinColors;
-}
 
 export function Coins(props: { coins: CoinsProps }) {
   const { coinsAmount, coinsNotEarnedAmount, coinColor = "green", hasPlus = false, hasBg = false } = props.coins

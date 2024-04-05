@@ -50,18 +50,4 @@
       @apply flex items-start justify-end;
     }
   }
-
-  .container-grid__completed {
-    & > :nth-child(2) {
-      @apply px-0;
-    }
-
-    & > :nth-child(3) {
-      @apply px-9;
-    }
-
-    & > :nth-child(4) {
-      @apply flex items-start justify-end;
-    }
-  }
 }
