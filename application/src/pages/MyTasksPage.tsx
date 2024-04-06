@@ -25,8 +25,6 @@ export function MyTasksPage(props: MyTasksPageProps) {
     fetchData(); // Вызываем функцию для загрузки данных при монтировании компонента
   }, []); // Пустой массив зависимостей для вызова useEffect только один раз
 
-  tasks.length > 0 ? console.log(tasks) : console.log("Loading..."); // Выводим данные в консоль, если задачи есть
-
   const upcoming = tasks.filter(val => !val.dateOfComplete)
   const completed = tasks.filter(val => val.dateOfComplete)
 
@@ -42,14 +40,14 @@ export function MyTasksPage(props: MyTasksPageProps) {
       {tasks.length > 0 ? (
         <>
           {upcoming.map(task => (
-            <UpcomingTask {...task} />
+            <UpcomingTask {...task} key={`${task.id}-${task.dateOfComplete}_${task.timeForComplete}`} />
           ))}
           <div className="container-grid">
             <div className=""></div>
             <div className="">Завершённые</div>
           </div>
           {completed.map(task => (
-            <CompletedTask {...task} />
+            <CompletedTask {...task}  key={`${task.id}-${task.dateOfComplete}_${task.timeForComplete}`} />
           ))}
         </>
       ) : (<p>Loading...</p>)}

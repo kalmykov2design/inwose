@@ -5,25 +5,26 @@ import { calculateCoins } from "../utils/calculateCoins";
 import { Coins } from "../components/Coins";
 import { determineCategory } from "../utils/determineCategory";
 import { TaskProps } from "../types/types";
-import moment from 'moment';
 import 'moment/locale/ru';
+import moment from "moment";
 
-export function UpcomingTask (props: TaskProps) {
+export function UpcomingTask(props: TaskProps) {
   const { taskType = "personal" } = props;
-
-  moment.locale('ru');
-  console.log(moment.locale('ru'));
-  console.log(moment("20111031", "YYYYMMDD").fromNow());
-  
-
   const formattedCategory = determineCategory(props.categoryName)
-  
+
+  console.log("deadline",props.deadline)
+  console.log("deadlineTime",props.deadlineTime)
+  console.log("deadlineTimeMS",props.deadlineTimeMS)
+
+  const timeLeft = moment(props.deadline).fromNow()
+
+
   return (
-    <div className="container-grid mb-4 bg-gray-100 rounded-lg" key={`${props.dateOfComplete}_${props.deadline}`}>
+    <div className="container-grid mb-4 bg-gray-100 rounded-lg">
       <div>
         <div className="grid grid-cols-2">
-          {props.deadline && <div>Осталось: <br /><b>{props.deadline}</b></div>}
-          {props.timeForComplete && <div>Прошло: <br /><b>{props.timeForComplete}</b></div>}
+          {props.deadline && <div>Дедлайн: <br /><b>{timeLeft}</b></div>}
+          {props.deadlineTime && <div>Прошло: <br /><b>{props.deadlineTime}</b></div>}
           {props.sizeName && <Size size={props.sizeName} />}
         </div>
         <div className="font-medium mt-4" style={{ color: formattedCategory?.color }}>{formattedCategory?.text}</div>

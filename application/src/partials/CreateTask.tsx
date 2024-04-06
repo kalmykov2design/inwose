@@ -2,19 +2,17 @@ import React, { useRef, useState } from "react";
 import { Button } from "../components/Button";
 import { Input } from "../components/Input";
 import { Radio } from "../components/Radio";
+import { TaskProps } from "../types/types";
+import moment from "moment";
 import { createTask } from "../api/api";
 
-interface CreateTaskProps {
+export function CreateTask() {
 
-}
-
-export function CreateTask(props: CreateTaskProps) {
-
-  const now = new Date();
-  const dateNow = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  const dateUpcoming = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 7);
-  const dateNowStr = dateNow.toLocaleDateString();
-  const dateUpcomingStr = dateUpcoming.toLocaleDateString();
+  const now = Date.now();
+  const dateNow = new Date(now).toLocaleString();
+  const dateUpcoming = new Date(now + 604800000).toLocaleString();
+  const dateNowStr = dateNow
+  const dateUpcomingStr = dateUpcoming.toLocaleString();
 
   const [isUpcoming, setIsUpcoming] = useState(false)
 
@@ -26,12 +24,41 @@ export function CreateTask(props: CreateTaskProps) {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
-    const obj: any = {}
+    const obj: TaskProps = {
+      categoryName: "qualification",
+      sizeName: "lg",
+      taskDescr: "",
+      taskName: "",
+      taskStatus: "",
+      taskType: "personal",
+
+      createdAt: 0,
+      changetAt: 0,
+      deletedAt: 0,
+
+      deadline: 0,
+      deadlineTime: "",
+      deadlineTimeMS: 0,
+      dateOfComplete: 0,
+      timeForComplete: 0,
+
+      coinsHasPlus: 0,
+      coinsHasBg: 0,
+      coinsAmount: 0,
+      coinsNotEarnedAmount: 0,
+      coinColor: "green",
+    }
 
     for (const [key, value] of formData) {
       obj[key] = value
     }
 
+    obj.deadline = obj.deadline ? moment(obj.deadline, 'DDMMYYYY').valueOf() : 0;
+    obj.deadlineTimeMS = Number(obj.deadlineTime?.split(':')[0]) * 360000 + Number(obj.deadlineTime?.split(':')[1]) * 6000 + Number(obj.deadlineTime?.split(':')[2]) * 100
+    obj.dateOfComplete = obj.dateOfComplete ? moment(obj.dateOfComplete, 'DDMMYYYY').valueOf() : 0;
+    obj.timeForComplete = obj.timeForComplete ? obj.timeForComplete * 360000 : 0;
+    obj.createdAt = moment().valueOf();
+    
     console.log(obj);
 
     createTask(obj);
@@ -83,13 +110,14 @@ export function CreateTask(props: CreateTaskProps) {
         </div>
         {isUpcoming && (
           <div className="mt-4 flex gap-2 items-end">
-            <Input name='deadline' label='Дедлайн' defaultValue={dateUpcomingStr} placeholder='Выбрать дату' />
+            <Input name='deadline' label='Дедлайн' defaultValue={dateUpcomingStr.split(',')[0]} placeholder='Выбрать дату' />
+            <Input name='deadlineTime' label='Время' defaultValue={dateUpcomingStr.split(',')[1]} placeholder='Выбрать дату' />
           </div>
         )}
         {!isUpcoming && (
           <div className="mt-4 flex gap-2 items-end">
-            <Input name='dateOfComplete' label='Дата выполнения' defaultValue={dateNowStr} placeholder='Выбрать дату' />
-            <Input name='timeForComplete' label='Время (ч)' placeholder='Затраченное время' />
+            <Input name='dateOfComplete' label='Дата выполнения' defaultValue={dateNowStr.split(',')[0]} placeholder='Выбрать дату' />
+            <Input name='timeForComplete' label='Время (ч)' defaultValue="1" placeholder='Затраченное время' />
           </div>
         )}
         <div className="mt-4 flex justify-end">

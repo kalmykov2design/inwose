@@ -21,36 +21,62 @@ app.use((req, res, next) => {
 
 // Создание карточки задачи
 app.post("/tasks", async (req, res) => {
-  const { 
+  const {
     categoryName,
-    deadline,
-    dateOfComplete,
     sizeName,
     taskDescr,
     taskName,
     taskStatus,
     taskType,
+
+    createdAt,
+    changetAt,
+    deletedAt,
+
+    deadline,
+    deadlineTime,
+    deadlineTimeMS,
+    dateOfComplete,
     timeForComplete,
+
+    coinsHasPlus,
+    coinsHasBg,
+    coinsAmount,
+    coinsNotEarnedAmount,
+    coinColor,
   } = req.body;
   const newTask = {
     categoryName,
-    deadline,
-    dateOfComplete,
     sizeName,
     taskDescr,
     taskName,
     taskStatus,
     taskType,
+
+    createdAt,
+    changetAt,
+    deletedAt,
+
+    deadline,
+    deadlineTime,
+    deadlineTimeMS,
+    dateOfComplete,
     timeForComplete,
+
+    coinsHasPlus,
+    coinsHasBg,
+    coinsAmount,
+    coinsNotEarnedAmount,
+    coinColor,
   };
-  await db.insert(tasks).values(newTask)
+  await db.insert(tasks).values(newTask);
   res.status(201).json(newTask);
 });
 
 // Получение списка всех карточек задач
 app.get("/tasks", async (req, res) => {
   console.log("Обработка запроса на получение списка задач");
-  const x = await db.select().from(tasks)
+  const x = await db.select().from(tasks);
   return res.json(x);
 });
 

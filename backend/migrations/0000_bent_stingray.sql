@@ -1,0 +1,22 @@
+CREATE TABLE `tasks` (
+	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
+	`category_name` text NOT NULL,
+	`size_name` text NOT NULL,
+	`task_descr` text,
+	`task_name` text NOT NULL,
+	`task_status` text NOT NULL,
+	`task_type` text NOT NULL,
+	`created_at` integer NOT NULL,
+	`changed_at` integer,
+	`deleted_at` integer,
+	`deadline` integer,
+	`deadline_time` text,
+	`deadline_time_ms` integer,
+	`date_of_complete` integer,
+	`time_for_complete` integer,
+	`coins_has_plus` integer,
+	`coins_has_bg` integer,
+	`coins_amount` integer,
+	`coins_not_earned_amount` integer,
+	`coin_color` text
+);

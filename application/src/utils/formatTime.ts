@@ -1,4 +1,5 @@
-function formatTime(seconds: number) {
+export function formatTime(seconds: number) {
+  seconds = seconds / 100
   const days = Math.floor(seconds / (60 * 60 * 24));
   const hours = Math.floor((seconds % (60 * 60 * 24)) / (60 * 60));
   const minutes = Math.floor((seconds % (60 * 60)) / 60);

@@ -5,20 +5,28 @@ import { calculateCoins } from "../utils/calculateCoins";
 import { Coins } from "../components/Coins";
 import { determineCategory } from "../utils/determineCategory";
 import { TaskProps } from "../types/types";
+import moment from "moment";
+import { formatTime } from "../utils/formatTime";
 
 
 
 export function CompletedTask (props: TaskProps) {
   const { taskType = "personal" } = props;
-
   const formattedCategory = determineCategory(props.categoryName)
+
+  console.log("date of complete",props.dateOfComplete)
+  console.log("time for complete",props.timeForComplete)
+  
+  const daysPassed = moment(props.dateOfComplete).fromNow()
+  // const timePassed = moment(props.timeForComplete).hours()
+  const timePassed = props.timeForComplete ? formatTime(props.timeForComplete) : 0
 
   return (
     <div className="relative container-grid mb-4 bg-gray-100 rounded-lg" key={`${props.dateOfComplete}_${props.deadline}`}>
       <div>
         <div className="grid grid-cols-2">
-          {props.deadline && <div>Осталось: <br /><b>{props.deadline}</b></div>}
-          {props.timeForComplete && <div>Прошло: <br /><b>{props.timeForComplete}</b></div>}
+          {props.dateOfComplete && <div>Вполнено: <br /><b>{daysPassed}</b></div>}
+          {props.timeForComplete && <div>Время: <br /><b>{timePassed}</b></div>}
           {props.sizeName && <Size size={props.sizeName} />}
         </div>
         <div className="font-medium mt-4" style={{ color: formattedCategory?.color }}>{formattedCategory?.text}</div>

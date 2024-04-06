@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Coins, CoinsProps } from './Coins';
+import { Coins } from './Coins';
 import { Button } from './Button';
 import { Modal } from './Modal';
 import { CreateTask } from '../partials/CreateTask';
 import { Logo } from '../assets/Logo';
+import { CoinsProps } from '../types/types';
 
 const headerItems = [
   { path: '/mytasks', text: 'Мои задачи' },

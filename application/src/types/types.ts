@@ -13,14 +13,29 @@ export interface CoinsProps {
 }
 
 export interface TaskProps {
+  id?: number;
   sizeName: SizeType;
   taskType: TaskType;
-  coins: CoinsProps;
   categoryName: TaskCategory;
   taskName: string;
   taskDescr?: string;
-  deadline?: number;
-  dateOfComplete?: string;
   taskStatus: string;
-  timeForComplete?: string;
+
+  createdAt: number;
+  changetAt?: number;
+  deletedAt?: number;
+
+  deadline?: number;
+  deadlineTime?: string;
+  deadlineTimeMS?: number;
+  dateOfComplete?: number;
+  timeForComplete?: number;
+
+  //bool
+  coinsHasPlus?: number; 
+  //bool
+  coinsHasBg?: number;
+  coinsAmount: number;
+  coinsNotEarnedAmount?: number;
+  coinColor?: CoinColors;
 }
