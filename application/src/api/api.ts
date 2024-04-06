@@ -1,13 +1,7 @@
-export interface CreateTaskProps {
-  categoryName: string;
-  deadline: string;
-  sizeName: string;
-  taskDescr: string;
-  taskName: string;
-  timeForTask: string;
-}
+import { TaskProps } from "../types/types";
 
-export const createTask = async (body: CreateTaskProps) => {
+
+export const createTask = async (body: TaskProps) => {
   console.log(body);
   
   const response = await fetch("http://localhost:3000/tasks", {
@@ -25,7 +19,7 @@ export const createTask = async (body: CreateTaskProps) => {
 export const getAllTasks = async () => {
   const response = await fetch("http://localhost:3000/tasks");
   const data = await response.json();
-  console.log(data);
+  console.log("Task added!");
   return data
 };
 
@@ -39,5 +33,6 @@ export const updateTask = async (taskId, title, description) => {
   });
 
   const data = await response.json();
-  console.log(data);
+  console.log("Task added!");
+  return data
 };
