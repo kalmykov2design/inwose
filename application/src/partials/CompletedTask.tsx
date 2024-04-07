@@ -26,8 +26,8 @@ export function CompletedTask (props: TaskProps) {
       <div>
         <div className="grid grid-cols-2">
           {props.dateOfComplete && <div>Вполнено: <br /><b>{daysPassed}</b></div>}
-          {props.timeForComplete && <div>Время: <br /><b>{timePassed}</b></div>}
           {props.sizeName && <Size size={props.sizeName} />}
+          {props.timeForComplete && <div className="mt-3">Время: <br /><b>{timePassed}</b></div>}
         </div>
         <div className="font-medium mt-4" style={{ color: formattedCategory?.color }}>{formattedCategory?.text}</div>
       </div>
@@ -36,8 +36,8 @@ export function CompletedTask (props: TaskProps) {
         <p>{props.taskDescr}</p>
       </div>
       <div>
-        <div className="flex justify-between items-center w-[290px]">
-          {determineButton(taskType)}
+        <div className="w-full translate-x-4 flex justify-between items-center border border-gray-600 rounded-full pl-10 pr-4 py-3">
+          Получил
           <Coins coins={calculateCoins(props.sizeName, props.categoryName)} />
         </div>
       </div>

@@ -24,7 +24,7 @@ export function UpcomingTask(props: TaskProps) {
       <div>
         <div className="grid grid-cols-2">
           {props.deadline && <div>Дедлайн: <br /><b>{timeLeft}</b></div>}
-          {props.deadlineTime && <div>Прошло: <br /><b>{props.deadlineTime}</b></div>}
+          {/* {props.deadlineTime && <div>Прошло: <br /><b>{props.deadlineTime}</b></div>} */}
           {props.sizeName && <Size size={props.sizeName} />}
         </div>
         <div className="font-medium mt-4" style={{ color: formattedCategory?.color }}>{formattedCategory?.text}</div>
