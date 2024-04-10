@@ -63,17 +63,29 @@ app.get("/tasks", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     return res.json(x);
 }));
 // Изменение карточки задачи
-// app.put("/tasks/:id", (req, res) => {
+// app.patch("/tasks/:id", (req, res) => {
 //   const taskId = Number(req.params.id);
-//   const { title, description } = req.body;
-//   const task = tasks.find((task) => task.id === taskId);
-//   if (!task) {
+//   const { title, description, taskStatus, changetAt, deadline } = req.body;
+//   const tasksArray = Object.keys(tasks).map(key => tasks[key]);
+//   const taskIndex = tasksArray.findIndex(task => task.id === taskId);
+//   if (taskIndex === -1) {
 //     return res.status(404).json({ message: "Task not found" });
 //   }
-//   task.title = title;
-//   task.description = description;
-//   res.json(task);
+//   const updatedTask = { ...tasksArray[taskIndex], title, description, taskStatus, changetAt, deadline };
+//   tasksArray[taskIndex] = updatedTask;
+//   res.json(updatedTask);
 // });
+app.patch("/tasks/:id", (req, res) => {
+    const taskId = Number(req.params.id);
+    const { title, description, taskStatus, changetAt, deadline } = req.body;
+    const tasksArray = Object.keys(schema_1.tasks).map(key => schema_1.tasks[key]);
+    const taskIndex = tasksArray.findIndex(task => task.id === taskId);
+    if (taskIndex === -1) {
+        return res.status(404).json({ message: "Task not found" });
+    }
+    schema_1.tasks[taskIndex] = Object.assign(Object.assign({}, schema_1.tasks[taskIndex]), { title: title || schema_1.tasks[taskIndex].title, description: description || schema_1.tasks[taskIndex].description, taskStatus: taskStatus || schema_1.tasks[taskIndex].taskStatus, changetAt: changetAt || schema_1.tasks[taskIndex].changetAt, deadline: deadline || schema_1.tasks[taskIndex].deadline });
+    res.json(schema_1.tasks[taskIndex]);
+});
 app.listen(3000, () => {
     console.log("Server is running on port 3000");
 });

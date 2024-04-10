@@ -11,28 +11,29 @@ export const createTask = async (body: TaskProps) => {
     },
     body: JSON.stringify(body),
   });
-
   const data = await response.json();
+  console.log("Task created!");  
   console.log(data);
 };
 
 export const getAllTasks = async () => {
   const response = await fetch("http://localhost:3000/tasks");
   const data = await response.json();
-  console.log("Task added!");
+  console.log("Here they are!");
   return data
 };
 
-export const updateTask = async (taskId, title, description) => {
+export const updateTask = async (taskId, updatedFields) => {
   const response = await fetch(`http://localhost:3000/tasks/${taskId}`, {
-    method: "PUT",
+    method: "PATCH",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ title, description }),
+    body: JSON.stringify(updatedFields),
   });
 
   const data = await response.json();
-  console.log("Task added!");
-  return data
+  console.log("Task updated (hopefully)!");
+  return data;
 };
+

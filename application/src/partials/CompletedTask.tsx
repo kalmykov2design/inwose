@@ -10,15 +10,10 @@ import { formatTime } from "../utils/formatTime";
 
 
 
-export function CompletedTask (props: TaskProps) {
+export function CompletedTask(props: TaskProps) {
   const { taskType = "personal" } = props;
   const formattedCategory = determineCategory(props.categoryName)
-
-  console.log("date of complete",props.dateOfComplete)
-  console.log("time for complete",props.timeForComplete)
-  
   const daysPassed = moment(props.dateOfComplete).fromNow()
-  // const timePassed = moment(props.timeForComplete).hours()
   const timePassed = props.timeForComplete ? formatTime(props.timeForComplete) : 0
 
   return (
@@ -35,11 +30,12 @@ export function CompletedTask (props: TaskProps) {
         <h3 className="font-medium text-xl mb-4">{props.taskName}</h3>
         <p>{props.taskDescr}</p>
       </div>
-      <div>
+      <div className="flex flex-col !items-end !justify-between gap-4">
         <div className="w-full translate-x-4 flex justify-between items-center border border-gray-600 rounded-full pl-10 pr-4 py-3">
           Получил
           <Coins coins={calculateCoins(props.sizeName, props.categoryName)} />
         </div>
+        <div className="">{taskType}</div>
       </div>
       <div className="absolute w-full h-full rounded-lg bg-white opacity-50"></div>
     </div>

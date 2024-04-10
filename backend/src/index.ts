@@ -81,20 +81,23 @@ app.get("/tasks", async (req, res) => {
 });
 
 // Изменение карточки задачи
-// app.put("/tasks/:id", (req, res) => {
-//   const taskId = Number(req.params.id);
-//   const { title, description } = req.body;
+app.patch("/tasks/:id", (req, res) => {
+  
+  const taskId = Number(req.params.id);
+  const { title, description, taskStatus, changetAt, deadline } = req.body;
 
-//   const task = tasks.find((task) => task.id === taskId);
-//   if (!task) {
-//     return res.status(404).json({ message: "Task not found" });
-//   }
+  const tasksArray = Object.keys(tasks).map(key => tasks[key]);
+  const taskIndex = tasksArray.findIndex(task => task.id === taskId);
 
-//   task.title = title;
-//   task.description = description;
+  if (taskIndex === -1) {
+    return res.status(404).json({ message: "Task not found" });
+  }
 
-//   res.json(task);
-// });
+  const updatedTask = { ...tasksArray[taskIndex], title, description, taskStatus, changetAt, deadline };
+  tasksArray[taskIndex] = updatedTask;
+
+  res.json(updatedTask);
+});
 
 app.listen(3000, () => {
   console.log("Server is running on port 3000");

@@ -4,11 +4,8 @@ import { getAllTasks } from "../api/api";
 import { UpcomingTask } from "../partials/UpcomingTask";
 import { CompletedTask } from "../partials/CompletedTask";
 import { TaskProps } from "../types/types";
-interface MyTasksPageProps {
-  data: TaskProps[];
-}
 
-export function MyTasksPage(props: MyTasksPageProps) {
+export function MyTasksPage() {
 
   const [tasks, setTasks] = useState<TaskProps[]>([]); // Инициализируем состояние для хранения данных
 

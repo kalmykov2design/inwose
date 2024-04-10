@@ -1,6 +1,7 @@
 import React from "react";
-import { TaskType } from "../components/Task"
+import { TaskType } from "../types/types";
 import { Button } from "../components/Button";
+import { updateTask } from "../api/api";
 
 export function determineButton(type: TaskType) {
   switch (type) {
