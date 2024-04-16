@@ -23,7 +23,7 @@ export const getAllTasks = async () => {
   return data
 };
 
-export const updateTask = async (taskId, updatedFields) => {
+export const updateTask = async (taskId: number | undefined, updatedFields: TaskProps) => {
   const response = await fetch(`http://localhost:3000/tasks/${taskId}`, {
     method: "PATCH",
     headers: {
@@ -33,7 +33,7 @@ export const updateTask = async (taskId, updatedFields) => {
   });
 
   const data = await response.json();
-  console.log("Task updated (hopefully)!");
+  console.log("Task updated (hopefully)!", data);
   return data;
 };
 

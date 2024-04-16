@@ -13,6 +13,8 @@ export function UpcomingTask(props: TaskProps) {
   const { taskType = "personal" } = props;
   const formattedCategory = determineCategory(props.categoryName)
   const timeLeft = moment(props.deadline).fromNow()
+  const now = moment().valueOf();
+  const timeForComplete = now - props.createdAt;
 
   return (
     <div className="container-grid mb-4 bg-gray-100 rounded-lg">
@@ -20,7 +22,6 @@ export function UpcomingTask(props: TaskProps) {
         <div className="grid grid-cols-2">
           {props.deadline && <div>Дедлайн: <br /><b>{timeLeft}</b></div>}
           {props.sizeName && <Size size={props.sizeName} />}
-          {/* {props.deadlineTime && <div>Прошло: <br /><b>{props.deadlineTime}</b></div>} */}
         </div>
         <div className="font-medium mt-4" style={{ color: formattedCategory?.color }}>{formattedCategory?.text}</div>
       </div>
@@ -30,7 +31,18 @@ export function UpcomingTask(props: TaskProps) {
       </div>
       <div className="flex flex-col !items-end !justify-between gap-4">
         <div className="flex justify-between items-center w-[290px]">
-          <Button type={"transparent"} onClick={() => updateTask(props.id, {title: "Изменённое название"})} />
+          <Button type={"transparent"} onClick={() => updateTask(props.id, {
+            taskStatus: "completed",
+            sizeName: props.sizeName,
+            taskType: props.taskType,
+            categoryName: props.categoryName,
+            taskName: props.taskName,
+            createdAt: props.createdAt,
+            coinsAmount: props.coinsAmount,
+            changetAt: now,
+            dateOfComplete: now,
+            timeForComplete: timeForComplete,
+          })} />
           <Coins coins={calculateCoins(props.sizeName, props.categoryName)} />
         </div>
         <div className="">{taskType}</div>

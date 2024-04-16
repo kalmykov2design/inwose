@@ -42,7 +42,7 @@ export function Header() {
           ))}
         </nav>
         <div className="gap-2">
-          <Button type='arbitrary' style={{ backgroundColor: "#0066ff", color: "white" }} action={openModal}>+ создать задачу</Button>
+          <Button type='arbitrary' style={{ backgroundColor: "#0066ff", color: "white" }} onClick={openModal}>+ создать задачу</Button>
           <Coins coins={coins} />
         </div>
       </div>

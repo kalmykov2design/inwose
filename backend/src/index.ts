@@ -4,6 +4,7 @@ import { drizzle } from "drizzle-orm/better-sqlite3";
 import { tasks } from "./schema";
 import Database from "better-sqlite3";
 import { migrate } from "drizzle-orm/better-sqlite3/migrator";
+import { eq } from "drizzle-orm";
 
 const sqlite = new Database("sqlite.db");
 const db = drizzle(sqlite);
@@ -21,56 +22,10 @@ app.use((req, res, next) => {
 
 // Создание карточки задачи
 app.post("/tasks", async (req, res) => {
-  const {
-    categoryName,
-    sizeName,
-    taskDescr,
-    taskName,
-    taskStatus,
-    taskType,
-
-    createdAt,
-    changetAt,
-    deletedAt,
-
-    deadline,
-    deadlineTime,
-    deadlineTimeMS,
-    dateOfComplete,
-    timeForComplete,
-
-    coinsHasPlus,
-    coinsHasBg,
-    coinsAmount,
-    coinsNotEarnedAmount,
-    coinColor,
-  } = req.body;
-  const newTask = {
-    categoryName,
-    sizeName,
-    taskDescr,
-    taskName,
-    taskStatus,
-    taskType,
-
-    createdAt,
-    changetAt,
-    deletedAt,
-
-    deadline,
-    deadlineTime,
-    deadlineTimeMS,
-    dateOfComplete,
-    timeForComplete,
-
-    coinsHasPlus,
-    coinsHasBg,
-    coinsAmount,
-    coinsNotEarnedAmount,
-    coinColor,
-  };
-  await db.insert(tasks).values(newTask);
-  res.status(201).json(newTask);
+  const obj = req.body;
+  // obj.validate()
+  await db.insert(tasks).values(obj);
+  res.status(201).json(obj);
 });
 
 // Получение списка всех карточек задач
@@ -81,22 +36,17 @@ app.get("/tasks", async (req, res) => {
 });
 
 // Изменение карточки задачи
-app.patch("/tasks/:id", (req, res) => {
-  
-  const taskId = Number(req.params.id);
-  const { title, description, taskStatus, changetAt, deadline } = req.body;
-
-  const tasksArray = Object.keys(tasks).map(key => tasks[key]);
-  const taskIndex = tasksArray.findIndex(task => task.id === taskId);
-
-  if (taskIndex === -1) {
-    return res.status(404).json({ message: "Task not found" });
+app.patch("/tasks/:id", async (req, res) => {
+  const obj = req.body;
+  const id = parseInt(req.params.id);
+  if (!obj.taskType) {
+    return res.status(400).send("Nonono mr fish")
   }
-
-  const updatedTask = { ...tasksArray[taskIndex], title, description, taskStatus, changetAt, deadline };
-  tasksArray[taskIndex] = updatedTask;
-
-  res.json(updatedTask);
+  if (Number.isNaN(id)) {
+    return res.status(400).send(`Ты лох ${req.params.id}`);
+  }
+  await db.update(tasks).set(obj).where(eq(tasks.id, id));
+  return res.json({answer: "Охуенно"});
 });
 
 app.listen(3000, () => {

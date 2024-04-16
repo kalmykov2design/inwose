@@ -18,6 +18,7 @@ const better_sqlite3_1 = require("drizzle-orm/better-sqlite3");
 const schema_1 = require("./schema");
 const better_sqlite3_2 = __importDefault(require("better-sqlite3"));
 const migrator_1 = require("drizzle-orm/better-sqlite3/migrator");
+const drizzle_orm_1 = require("drizzle-orm");
 const sqlite = new better_sqlite3_2.default("sqlite.db");
 const db = (0, better_sqlite3_1.drizzle)(sqlite);
 (0, migrator_1.migrate)(db, { migrationsFolder: "./migrations" });
@@ -31,30 +32,10 @@ app.use((req, res, next) => {
 });
 // Создание карточки задачи
 app.post("/tasks", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { categoryName, sizeName, taskDescr, taskName, taskStatus, taskType, createdAt, changetAt, deletedAt, deadline, deadlineTime, deadlineTimeMS, dateOfComplete, timeForComplete, coinsHasPlus, coinsHasBg, coinsAmount, coinsNotEarnedAmount, coinColor, } = req.body;
-    const newTask = {
-        categoryName,
-        sizeName,
-        taskDescr,
-        taskName,
-        taskStatus,
-        taskType,
-        createdAt,
-        changetAt,
-        deletedAt,
-        deadline,
-        deadlineTime,
-        deadlineTimeMS,
-        dateOfComplete,
-        timeForComplete,
-        coinsHasPlus,
-        coinsHasBg,
-        coinsAmount,
-        coinsNotEarnedAmount,
-        coinColor,
-    };
-    yield db.insert(schema_1.tasks).values(newTask);
-    res.status(201).json(newTask);
+    const obj = req.body;
+    // obj.validate()
+    yield db.insert(schema_1.tasks).values(obj);
+    res.status(201).json(obj);
 }));
 // Получение списка всех карточек задач
 app.get("/tasks", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -63,29 +44,18 @@ app.get("/tasks", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     return res.json(x);
 }));
 // Изменение карточки задачи
-// app.patch("/tasks/:id", (req, res) => {
-//   const taskId = Number(req.params.id);
-//   const { title, description, taskStatus, changetAt, deadline } = req.body;
-//   const tasksArray = Object.keys(tasks).map(key => tasks[key]);
-//   const taskIndex = tasksArray.findIndex(task => task.id === taskId);
-//   if (taskIndex === -1) {
-//     return res.status(404).json({ message: "Task not found" });
-//   }
-//   const updatedTask = { ...tasksArray[taskIndex], title, description, taskStatus, changetAt, deadline };
-//   tasksArray[taskIndex] = updatedTask;
-//   res.json(updatedTask);
-// });
-app.patch("/tasks/:id", (req, res) => {
-    const taskId = Number(req.params.id);
-    const { title, description, taskStatus, changetAt, deadline } = req.body;
-    const tasksArray = Object.keys(schema_1.tasks).map(key => schema_1.tasks[key]);
-    const taskIndex = tasksArray.findIndex(task => task.id === taskId);
-    if (taskIndex === -1) {
-        return res.status(404).json({ message: "Task not found" });
+app.patch("/tasks/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const obj = req.body;
+    const id = parseInt(req.params.id);
+    if (!obj.taskType) {
+        return res.status(400).send("Nonono mr fish");
     }
-    schema_1.tasks[taskIndex] = Object.assign(Object.assign({}, schema_1.tasks[taskIndex]), { title: title || schema_1.tasks[taskIndex].title, description: description || schema_1.tasks[taskIndex].description, taskStatus: taskStatus || schema_1.tasks[taskIndex].taskStatus, changetAt: changetAt || schema_1.tasks[taskIndex].changetAt, deadline: deadline || schema_1.tasks[taskIndex].deadline });
-    res.json(schema_1.tasks[taskIndex]);
-});
+    if (Number.isNaN(id)) {
+        return res.status(400).send(`Ты лох ${req.params.id}`);
+    }
+    yield db.update(schema_1.tasks).set(obj).where((0, drizzle_orm_1.eq)(schema_1.tasks.id, id));
+    return res.json({ answer: "Охуенно" });
+}));
 app.listen(3000, () => {
     console.log("Server is running on port 3000");
 });

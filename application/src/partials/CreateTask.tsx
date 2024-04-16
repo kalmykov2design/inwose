@@ -24,14 +24,8 @@ export function CreateTask() {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
-    const obj: TaskProps = {
-      categoryName: "qualification",
-      sizeName: "lg",
-      taskDescr: "",
-      taskName: "",
-      taskStatus: "",
-      taskType: "personal",
 
+    const obj = {
       createdAt: 0,
       changetAt: 0,
       deletedAt: 0,
@@ -58,7 +52,7 @@ export function CreateTask() {
     obj.dateOfComplete = obj.dateOfComplete ? moment(obj.dateOfComplete, 'DDMMYYYY').valueOf() : 0;
     obj.timeForComplete = obj.timeForComplete ? obj.timeForComplete * 360000 : 0;
     obj.createdAt = moment().valueOf();
-    
+
     console.log(obj);
 
     createTask(obj);

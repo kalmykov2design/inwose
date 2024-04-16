@@ -1,5 +1,6 @@
 export type TaskType = "personal" | "pari" | "team"
 export type TaskCategory = "qualification" | "outlook"
+export type TaskStatus = "completed" | "upcoming"
 export type SizeType = "sm" | "md" | "lg";
 
 export type CoinColors = "green" | "red"
@@ -19,7 +20,7 @@ export interface TaskProps {
   categoryName: TaskCategory;
   taskName: string;
   taskDescr?: string;
-  taskStatus: string;
+  taskStatus: TaskStatus;
 
   createdAt: number;
   changetAt?: number;
