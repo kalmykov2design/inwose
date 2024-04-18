@@ -8,14 +8,15 @@ import 'moment/locale/ru';
 import moment from "moment";
 import { updateTask } from "../api/api";
 import { Button } from "../components/Button";
+import { formatTime } from "../utils/formatTime";
 
 export function UpcomingTask(props: TaskProps) {
   const { taskType = "personal" } = props;
   const formattedCategory = determineCategory(props.categoryName)
-  const timeLeft = moment(props.deadline).fromNow()
   const now = moment().valueOf();
+  const timeLeft = formatTime(props.deadline - now)
   const timeForComplete = now - props.createdAt;
-
+  
   return (
     <div className="container-grid mb-4 bg-gray-100 rounded-lg">
       <div>

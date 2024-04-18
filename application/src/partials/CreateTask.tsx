@@ -2,7 +2,6 @@ import React, { useRef, useState } from "react";
 import { Button } from "../components/Button";
 import { Input } from "../components/Input";
 import { Radio } from "../components/Radio";
-import { TaskProps } from "../types/types";
 import moment from "moment";
 import { createTask } from "../api/api";
 
@@ -47,13 +46,11 @@ export function CreateTask() {
       obj[key] = value
     }
 
-    obj.deadline = obj.deadline ? moment(obj.deadline, 'DDMMYYYY').valueOf() : 0;
     obj.deadlineTimeMS = Number(obj.deadlineTime?.split(':')[0]) * 360000 + Number(obj.deadlineTime?.split(':')[1]) * 6000 + Number(obj.deadlineTime?.split(':')[2]) * 100
+    obj.deadline = obj.deadline ? moment(obj.deadline, 'DDMMYYYY').valueOf() + obj.deadlineTimeMS : 0;
     obj.dateOfComplete = obj.dateOfComplete ? moment(obj.dateOfComplete, 'DDMMYYYY').valueOf() : 0;
     obj.timeForComplete = obj.timeForComplete ? obj.timeForComplete * 360000 : 0;
     obj.createdAt = moment().valueOf();
-
-    console.log(obj);
 
     createTask(obj);
   }
